@@ -2,9 +2,11 @@
     "name": "apizen",
     "version": "0.0.1",
     "description": "Sane api application.",
-    "main": "./lib/start.js",
+    "main": "./lib/index.js",
     "scripts": {
-	"test": "node node_modules/lab/bin/lab -a code -t 100 -m 15000 -L -v -C -r html -o coverage.html -r console -o stdout"
+	"start": "node lib/start",
+	"test": "node node_modules/lab/bin/lab -a code -t 100 -m 15000 -L -v -C -r html -o coverage/coverage.html -r console -o stdout",
+	"watch": "gulp watch"
     },
     "repository": {
 	"type": "git",
@@ -29,7 +31,6 @@
 	"good-file": "5.x.x",
 	"hapi": "10.x.x",
 	"http-status": "0.2.0",
-	"inert": "3.x.x",
 	"joi": "6.x.x",
 	"hoek": "2.x.x",
 	"joi": "6.x.x",
