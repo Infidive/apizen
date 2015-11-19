@@ -26,7 +26,7 @@ gulp.task('modules', function (callback) {
 });
 
 // Watch changes
-gulp.task('watch', function () {
+gulp.task('watch', ['test'], function () {
 
     // If files changes run test coverages
     gulp.watch(['lib/**/*.js', 'test/**/*.js'], ['test']);
