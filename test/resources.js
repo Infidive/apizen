@@ -28,7 +28,5 @@ describe('resources /index', function () {
 
         expect(testresource).not.to.exist();
         done();
-
     });
 });
-

@@ -1,7 +1,6 @@
 'use strict';
 
 // Load modules
-var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
 var App = require('./vise');
@@ -13,7 +12,6 @@ var describe = lab.experiment;
 var expect = Code.expect;
 var it = lab.test;
 
-// Tesing the index
 describe('server', function () {
 
     it('starts server and returns hapi server object', function (done) {
@@ -21,7 +19,7 @@ describe('server', function () {
         App.init( function (err, server) {
 
             expect(err).to.not.exist();
-            expect(server).to.be.instanceof(Hapi.Server);
+            expect(server).to.be.instanceof(require('hapi').Server);
 
             server.stop(done);
         });
