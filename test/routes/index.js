@@ -5,11 +5,7 @@
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
-var App = require('../../lib');
-var Path = require('path');
-
-//declare internals
-var internals = {};
+var App = require('./../vise');
 
 // Test shortcuts
 var lab = exports.lab = Lab.script();
@@ -22,7 +18,7 @@ describe('/resources/index', function () {
 
     it('returns an index page of the app', function (done) {
 
-        App.init(internals.manifest, internals.composeOptions, function (err, server) {
+        App.init(function (err, server) {
 
             expect(err).to.not.exist();
 
@@ -38,19 +34,3 @@ describe('/resources/index', function () {
         });
     });
 });
-
-
-internals.manifest = {
-    connections: [
-        {
-            host: 'localhost',
-            port: 0
-        }],
-    plugins: {
-        './resources': {}
-    }
-};
-
-internals.composeOptions = {
-    relativeTo: Path.resolve(__dirname, '../../lib')
-};

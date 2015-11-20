@@ -4,28 +4,21 @@
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
-var App = require('../lib');
-var Resources = require('../lib/resources');
-var Path = require('path');
-
-//declare internals
-
-var internals = {};
+var App = require('./vise');
+var Plugin = require('./vise/plugin');
 
 // Test shortcuts
-
 var lab = exports.lab = Lab.script();
 var describe = lab.experiment;
 var expect = Code.expect;
 var it = lab.test;
 
 // Tesing the index
-
 describe('/index', function () {
 
     it('starts server and returns hapi server object', function (done) {
 
-        App.init(internals.manifest, internals.composeOptions, function (err, server) {
+        App.init( function (err, server) {
 
             expect(err).to.not.exist();
             expect(server).to.be.instanceof(Hapi.Server);
@@ -36,18 +29,18 @@ describe('/index', function () {
 
     it('starts server with error, it should stop', function (done) {
 
-        var orig = Resources.register;
-        Resources.register = function (server, options, next) {
+        var orig = Plugin.register;
+        Plugin.register = function (server, options, next) {
 
-            Resources.register = orig;
+            Plugin.register = orig;
             return next(new Error('register plugin failed'));
         };
 
-        Resources.register.attributes = {
+        Plugin.register.attributes = {
             name: 'faulty plugin'
         };
 
-        App.init(internals.manifest, internals.composeOptions, function (err, server) {
+        App.init( function (err, server) {
 
             expect(err).to.exist();
             expect(err.message).to.equal('register plugin failed');
@@ -56,18 +49,3 @@ describe('/index', function () {
         });
     });
 });
-
-internals.manifest = {
-    connections: [{
-        host: 'localhost',
-        port: 0,
-        labels: ['api']
-    }],
-    plugins: {
-        './resources': {}
-    }
-};
-
-internals.composeOptions = {
-    relativeTo: Path.resolve(__dirname, '../lib')
-};
