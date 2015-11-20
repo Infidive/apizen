@@ -6,11 +6,9 @@ var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
 var App = require('../../lib');
-var Routes = require('../../lib/routes');
 var Path = require('path');
 
 //declare internals
-
 var internals = {};
 
 // Test shortcuts
@@ -20,7 +18,7 @@ var expect = Code.expect;
 var it = lab.test;
 
 // Testing routes.js
-describe('/routes/index', function () {
+describe('/resources/index', function () {
 
     it('returns an index page of the app', function (done) {
 
@@ -49,7 +47,7 @@ internals.manifest = {
             port: 0
         }],
     plugins: {
-        './routes': {}
+        './resources': {}
     }
 };
 

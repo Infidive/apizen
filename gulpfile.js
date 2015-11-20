@@ -10,7 +10,7 @@ gulp.task('test', function (callback) {
 
         console.log(stdout);
         console.log(stderr);
-        callback(error);
+        callback();
     });
 });
 

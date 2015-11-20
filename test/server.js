@@ -5,7 +5,7 @@ var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
 var App = require('../lib');
-var Routes = require('../lib/routes');
+var Resources = require('../lib/resources');
 var Path = require('path');
 
 //declare internals
@@ -36,14 +36,14 @@ describe('/index', function () {
 
     it('starts server with error, it should stop', function (done) {
 
-        var orig = Routes.register;
-        Routes.register = function (server, options, next) {
+        var orig = Resources.register;
+        Resources.register = function (server, options, next) {
 
-            Routes.register = orig;
+            Resources.register = orig;
             return next(new Error('register plugin failed'));
         };
 
-        Routes.register.attributes = {
+        Resources.register.attributes = {
             name: 'faulty plugin'
         };
 
@@ -64,7 +64,7 @@ internals.manifest = {
         labels: ['api']
     }],
     plugins: {
-        './routes': {}
+        './resources': {}
     }
 };
 
