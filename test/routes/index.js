@@ -1,7 +1,6 @@
 'use strict';
 
 // Load modules
-
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
@@ -14,7 +13,7 @@ var expect = Code.expect;
 var it = lab.test;
 
 // Testing routes.js
-describe('/resources/index', function () {
+describe('routes /index', function () {
 
     it('returns an index page of the app', function (done) {
 

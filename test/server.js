@@ -14,7 +14,7 @@ var expect = Code.expect;
 var it = lab.test;
 
 // Tesing the index
-describe('/index', function () {
+describe('server', function () {
 
     it('starts server and returns hapi server object', function (done) {
 

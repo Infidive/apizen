@@ -29,7 +29,7 @@ gulp.task('modules', function (callback) {
 gulp.task('watch', ['test'], function () {
 
     // If files changes run test coverages
-    gulp.watch(['lib/**/*.js', 'test/**/*.js'], ['test']);
+    gulp.watch(['lib/**/*.js', 'test/**/**/*.js'], ['test']);
 
     // If package.json changes install packages
     gulp.watch(['package.json'], ['modules']);
