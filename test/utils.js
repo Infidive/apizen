@@ -13,7 +13,7 @@ var it = lab.test;
 
 describe('utils - utils/index', function () {
 
-    it('Checks if lsdir returns array of ony wanted files', function (done) {
+    it('Checks if lsdir returns array of only wanted files', function (done) {
 
         var files = require('../lib/utils').lsdir(Path.join(__dirname),'utils.js');
 
