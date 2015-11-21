@@ -1,12 +1,12 @@
 'use strict';
 
-var gulp = require('gulp');
-var exec = require('child_process').exec;
+var Gulp = require('gulp');
+var Exec = require('child_process').exec;
 
 // Run tests
-gulp.task('test', function (callback) {
+Gulp.task('test', function (callback) {
 
-    exec('npm test', function (error, stdout, stderr) {
+    Exec('npm test', function (error, stdout, stderr) {
 
         console.log(stdout);
         console.log(stderr);
@@ -15,9 +15,9 @@ gulp.task('test', function (callback) {
 });
 
 // Run installs
-gulp.task('modules', function (callback) {
+Gulp.task('modules', function (callback) {
 
-    exec('npm install', function (error, stdout, stderr){
+    Exec('npm install', function (error, stdout, stderr){
 
         console.log(stdout);
         console.log(stderr);
@@ -26,11 +26,11 @@ gulp.task('modules', function (callback) {
 });
 
 // Watch changes
-gulp.task('watch', ['test'], function () {
+Gulp.task('watch', ['modules', 'test'], function () {
 
     // If files changes run test coverages
-    gulp.watch(['lib/**/*.js', 'test/**/**/*.js'], ['test']);
+    Gulp.watch(['lib/**/*.js', 'test/**/**/*.js'], ['test']);
 
     // If package.json changes install packages
-    gulp.watch(['package.json'], ['modules']);
+    Gulp.watch(['package.json'], ['modules', 'test']);
 });
