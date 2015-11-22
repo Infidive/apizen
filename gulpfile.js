@@ -32,5 +32,5 @@ Gulp.task('watch', ['modules', 'test'], function () {
     Gulp.watch(['lib/**/*.js', 'test/**/**/*.js'], ['test']);
 
     // If package.json changes install packages
-    Gulp.watch(['package.json'], ['modules', 'test']);
+    Gulp.watch(['package.json'], ['modules']);
 });

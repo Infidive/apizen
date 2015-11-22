@@ -16,8 +16,8 @@ internals.manifest = {
     }],
     plugins: {
         './plugin': {},
-        '../../lib/version': {
-            uriParams: 'version'
+        'consistency': {
+            uriParam: 'version'
         }
     }
 };
