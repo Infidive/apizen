@@ -5,6 +5,7 @@ var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
 var App = require('./../vise');
+var _ = require('lodash');
 
 // Test shortcuts
 var lab = exports.lab = Lab.script();
@@ -12,52 +13,47 @@ var describe = lab.experiment;
 var expect = Code.expect;
 var it = lab.test;
 
+// Test server
+var server;
+
+// Test function
+var testurk = function (test, request, helloVersion) {
+
+    return it(test, function (done) {
+
+        server.inject(request, function (res) {
+
+            var payload = JSON.parse(res.payload);
+            expect(res.statusCode, 'Status code').to.equal(200);
+            expect(payload.hello).to.equal(helloVersion);
+        });
+
+        done();
+    });
+};
+
 // Testing routes.js
 describe('routes /index', function () {
 
-    it('returns an index page of the app', function (done) {
+    // Start the server before any test
+    lab.before(function (done) {
 
-        App.init(function (err, server) {
+        App.init(function (err, apiServer) {
 
             expect(err).to.not.exist();
-
-            var request = { method: 'GET', url: '/' };
-
-            server.inject(request, function (res) {
-
-                expect(res.statusCode, 'Status code').to.equal(200);
-                expect(res.payload).to.contain('version 1');
-
-            });
-
-            server.stop(done);
+            server = apiServer;
+            done();
         });
     });
 
-    it('Test different versions of index route', function (done) {
+    // Testing the index route
+    testurk('Get the latest index version', { method: 'GET', url: '/' }, 'version 1');
+    testurk('Get the version 0 of index', { method: 'GET', url: '/v0' }, 'version 0');
 
-        App.init(function (err, server) {
+    // After all tests
+    // Stop the server
+    lab.after(function (done) {
 
-            expect(err).to.not.exist();
-
-            var requestV0 = { method: 'GET', url: '/v0' };
-            var requestV1 = { method: 'GET', url: '/v1' };
-
-            // Test v0
-            server.inject(requestV0, function (res) {
-
-                expect(res.statusCode, 'Status code').to.equal(200);
-                expect(res.payload).to.contain('version 0');
-            });
-
-            // Test v1
-            server.inject(requestV1, function (res) {
-
-                expect(res.statusCode, 'Status code').to.equal(200);
-                expect(res.payload).to.contain('version 1');
-            });
-
-            server.stop(done);
-        });
+        server.stop(done);
     });
 });
