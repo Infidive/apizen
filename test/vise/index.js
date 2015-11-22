@@ -15,7 +15,10 @@ internals.manifest = {
         labels: ['test']
     }],
     plugins: {
-        './plugin': {}
+        './plugin': {},
+        '../../lib/version': {
+            uriParams: 'version'
+        }
     }
 };
 
