@@ -41,8 +41,7 @@
     "devDependencies": {
 	"code": "1.x.x",
 	"lab": "5.x.x",
-	"gulp": "3.x.x",
-	"superagent": "1.x.x"
+	"gulp": "3.x.x"
     },
     "engines": {
 	"node": ">=0.10.35"

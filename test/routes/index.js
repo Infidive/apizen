@@ -5,7 +5,6 @@ var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
 var App = require('./../vise');
-var _ = require('lodash');
 
 // Test shortcuts
 var lab = exports.lab = Lab.script();
