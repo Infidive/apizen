@@ -12,7 +12,11 @@ internals.manifest = {
     connections: [{
         host: 'localhost',
         port: 0,
-        labels: ['test']
+        labels: ['test'],
+        router: {
+            'isCaseSensitive': false,
+            'stripTrailingSlash': true
+        }
     }],
     plugins: {
         './plugin': {},
@@ -29,7 +33,9 @@ internals.manifest = {
             }]
         },
         'consistency': {
-            uriParam: 'version'
+            uriParam: 'version',
+            acceptNamespace: 'apizen',
+            customHeaderKey: 'api-version'
         }
     }
 };
