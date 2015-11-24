@@ -16,6 +16,18 @@ internals.manifest = {
     }],
     plugins: {
         './plugin': {},
+        'good': {
+            opsInterval: 1000,
+            reporters: [{
+                reporter: require('good-console'),
+                events: {
+                    error: '*',
+                    log: '*',
+                    response: '*',
+                    request: '*'
+                }
+            }]
+        },
         'consistency': {
             uriParam: 'version'
         }
