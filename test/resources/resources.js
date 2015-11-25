@@ -4,8 +4,7 @@
 var Hapi = require('hapi');
 var Code = require('code');
 var Lab = require('lab');
-var Resource = require('../lib/resources').resource;
-var _ = require('lodash');
+var Resource = require('../../lib/resources').resource;
 
 // Test shortcuts
 var lab = exports.lab = Lab.script();
@@ -30,7 +29,7 @@ describe('resources /index', function () {
         done();
     });
 
-    it('Checks that resource does not generate routes when no genroutes have been passed', function (done) {
+    it('Checks that resource does not generate routes by default', function (done) {
 
         var testresource = new Resource({
             name: 'foo',
@@ -40,22 +39,6 @@ describe('resources /index', function () {
         expect(testresource).to.exist();
         expect(testresource.routes).to.be.array();
         expect(testresource.routes.length).to.equal(0);
-        done();
-    });
-
-    it('Checks that resource generates routes when genroutes have been passed', function (done) {
-
-        var testresource = new Resource({
-            name: 'bar',
-            endpoint: 'bar',
-            genroutes: true
-        });
-
-        expect(testresource).to.exist();
-        expect(testresource.routes).to.be.array();
-        expect(testresource.routes.length).to.above(0);
-        var index = testresource.getRouteIndex('index_get_bar');
-        expect(index).to.equal(0); // that is the first route generated
         done();
     });
 });
