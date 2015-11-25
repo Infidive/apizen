@@ -46,7 +46,7 @@ describe('routes /index', function () {
     });
 
     // Testing the index route
-    testurk('GET the latest index version', { method: 'GET', url: '/' }, 'version 1');
+    testurk('GET the latest index version', { method: 'GET', url: '/' }, 'version 0');
     testurk('GET the version 0 of index', { method: 'GET', url: '/v0' }, 'version 0');
     testurk('POST the version 0 of index', { method: 'POST', url: '/v0' }, 'version 0');
 
