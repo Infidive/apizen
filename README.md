@@ -46,7 +46,7 @@ More [...]
 Writting code for clarity and striving for 100% code coverage through out.
 
 
-## Bugs & Issues
+## Bugs, enhancements and issues ![Issues ](https://img.shields.io/github/issues/Infidive/apizen.svg)
 
 Got some inspiration for better things or stuff doesn't work, open an [issue ](https://github.com/Infidive/apizen/issues), and let's work on it.
 
