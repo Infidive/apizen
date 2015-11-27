@@ -36,8 +36,6 @@
     "http-status": "0.2.0",
     "joi": "6.x.x",
     "lodash": "3.x.x",
-    "node-uuid": "1.x.x",
-    "shortid": "2.x.x",
     "wagner-core": "0.2.0"
   },
   "devDependencies": {

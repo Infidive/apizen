@@ -25,36 +25,5 @@ describe('utils - utils/index', function () {
         expect(files).not.to.contain('.foo.js');
         expect(files).not.to.contain('utils.js~');
         done();
-
     });
-
-    it('Checks keyGen', function (done) {
-
-        var uuidv4format = /[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i;
-
-        var shortid = null;
-        var uuid = null;
-
-        Wagner.task('generateIds', function (callback){
-
-            shortid = Utils.keyGen.shortid();
-            uuid = Utils.keyGen.uuid();
-            var error = null;
-
-            if (!shortid || !uuid) {
-                error = new Error('Couln\'t generate a key');
-            }
-
-            callback(error, 'generated');
-        });
-
-        Wagner.invokeAsync(function (error, generateIds) {
-
-            expect(error).not.to.exist();
-            expect(Shortid.isValid(shortid), 'An instance of shortid').to.be.true();
-            expect(uuid).match(uuidv4format);
-            done();
-        });
-    });
-
 });
