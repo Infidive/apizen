@@ -5,8 +5,6 @@ var Code = require('code');
 var Lab = require('lab');
 var Path = require('path');
 var Utils = require('../lib/utils');
-var Shortid = require('shortid');
-var Wagner = require('wagner-core');
 
 // Test shortcuts
 var lab = exports.lab = Lab.script();
