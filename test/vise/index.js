@@ -2,9 +2,30 @@
 
 // Module dependentants
 var App = require('../../lib');
+var Hawk = require('hawk');
 
 // Declare internals
 var internals = {};
+
+// Test client credentials
+internals.clientCredentials = {
+    id: 'test-BB000E8E9517',
+    key: 'B23A3C8A951611E5A2F743ADD2576E7F',
+    algorithm: 'sha256'
+};
+
+// Server methods
+internals.methods = {};
+
+// computes MAC header used to authenticate client
+// @public
+// @params requestDetails - object with path and method.
+internals.methods.generateAuthHeader = function (requestDetails, clientCredentials) {
+
+    var clientCreds = clientCredentials || internals.clientCredentials;
+
+    return Hawk.client.header(this.info.uri + requestDetails.path, requestDetails.method, { credentials: clientCreds });
+};
 
 // Manifest for the test server
 // @private
@@ -36,7 +57,9 @@ internals.manifest = {
             uriParam: 'version',
             acceptNamespace: 'apizen',
             customHeaderKey: 'api-version'
-        }
+        },
+        'hapi-auth-hawk': {},
+        '../../lib/auth': {}
     }
 };
 
@@ -52,9 +75,18 @@ internals.init = function (next){
 
     App.init(internals.manifest, internals.composeOptions, function (err, server) {
 
-        // Return the initialized server or error
+        // If error stop here
+        if (err) {
+            return next(err);
+        }
+
+	// Adding some methods
+        server.method('authHeader', internals.methods.generateAuthHeader, { bind: server });
+
+	// Returning a server
         return next(err, server);
     });
 };
 
+// Exports
 exports.init = internals.init;
