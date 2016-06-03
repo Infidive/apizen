@@ -1,11 +1,11 @@
 'use strict';
 
 // Module dependentants
-var App = require('../../lib');
-var Hawk = require('hawk');
+const App = require('../../lib');
+const Hawk = require('hawk');
 
 // Declare internals
-var internals = {};
+const internals = {};
 
 // Test client credentials
 internals.clientCredentials = {
@@ -22,7 +22,7 @@ internals.methods = {};
 // @params requestDetails - object with path and method.
 internals.methods.generateAuthHeader = function (requestDetails, clientCredentials) {
 
-    var clientCreds = clientCredentials || internals.clientCredentials;
+    const clientCreds = clientCredentials || internals.clientCredentials;
 
     return Hawk.client.header(this.info.uri + requestDetails.path, requestDetails.method, { credentials: clientCreds });
 };
@@ -73,17 +73,17 @@ internals.composeOptions = {
 // @public
 internals.init = function (next){
 
-    App.init(internals.manifest, internals.composeOptions, function (err, server) {
+    App.init(internals.manifest, internals.composeOptions, (err, server) => {
 
         // If error stop here
         if (err) {
             return next(err);
         }
 
-	// Adding some methods
+        // Adding some methods
         server.method('authHeader', internals.methods.generateAuthHeader, { bind: server });
 
-	// Returning a server
+        // Returning a server
         return next(err, server);
     });
 };

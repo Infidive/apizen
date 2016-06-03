@@ -1,25 +1,29 @@
 'use strict';
 
 // Load modules
-var Hapi = require('hapi');
-var Code = require('code');
-var Lab = require('lab');
-var Resource = require('../../lib/resources').resource;
+const Code = require('code');
+const Lab = require('lab');
+const Resource = require('../../lib/resources').resource;
 
 // Test shortcuts
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
-var expect = Code.expect;
-var it = lab.test;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
+const expect = Code.expect;
+const it = lab.test;
 
 // Tesing the index
-describe('resources /index', function () {
+describe('resources /index', () => {
 
-    it('Throw error when attempt to create an invalid resource', function (done) {
+    it('Throw error when attempt to create an invalid resource', (done) => {
+
+        let testresource;
 
         try {
-            var testresource = new Resource();
-        } catch (error){
+
+            // This should never be called
+            testresource = new Resource();
+        }
+        catch (error){
 
             expect(error).to.exist();
             expect(error.name).to.equal('ValidationError');
@@ -29,9 +33,9 @@ describe('resources /index', function () {
         done();
     });
 
-    it('Checks that resource does not generate routes by default', function (done) {
+    it('Checks that resource does not generate routes by default', (done) => {
 
-        var testresource = new Resource({
+        const testresource = new Resource({
             name: 'foo',
             endpoint: '/foo'
         });

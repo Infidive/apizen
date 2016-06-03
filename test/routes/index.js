@@ -1,28 +1,27 @@
 'use strict';
 
 // Load modules
-var Hapi = require('hapi');
-var Code = require('code');
-var Lab = require('lab');
-var App = require('./../vise');
+const Code = require('code');
+const Lab = require('lab');
+const App = require('./../vise');
 
 // Test shortcuts
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
-var expect = Code.expect;
-var it = lab.test;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
+const expect = Code.expect;
+const it = lab.test;
 
 // Test server
-var server;
+let server;
 
 // Test function
-var testurk = function (test, request, helloVersion) {
+const testurk = (test, request, helloVersion) => {
 
-    return it(test, function (done) {
+    return it(test, (done) => {
 
-        server.inject(request, function (res) {
+        server.inject(request, (res) => {
 
-            var payload = JSON.parse(res.payload);
+            const payload = JSON.parse(res.payload);
             expect(res.statusCode, 'Status code').to.equal(200);
             expect(payload.hello).to.equal(helloVersion);
         });
@@ -32,12 +31,12 @@ var testurk = function (test, request, helloVersion) {
 };
 
 // Testing routes.js
-describe('routes /index', function () {
+describe('routes /index', () => {
 
     // Start the server before any test
-    lab.before(function (done) {
+    lab.before((done) => {
 
-        App.init(function (err, apiServer) {
+        App.init((err, apiServer) => {
 
             expect(err).to.not.exist();
             server = apiServer;
@@ -51,7 +50,7 @@ describe('routes /index', function () {
 
     // After all tests
     // Stop the server
-    lab.after(function (done) {
+    lab.after((done) => {
 
         server.stop(done);
     });

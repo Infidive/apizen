@@ -1,1 +1,1 @@
-this is just to test lsdir in util 
+const blab = "this is just to test lsdir in util";

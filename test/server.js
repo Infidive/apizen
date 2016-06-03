@@ -1,34 +1,34 @@
 'use strict';
 
 // Load modules
-var Code = require('code');
-var Lab = require('lab');
-var App = require('./vise');
-var Plugin = require('./vise/plugin');
+const Code = require('code');
+const Lab = require('lab');
+const App = require('./vise');
+const Plugin = require('./vise/plugin');
 
 // Test shortcuts
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
-var expect = Code.expect;
-var it = lab.test;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
+const expect = Code.expect;
+const it = lab.test;
 
-describe('server', function () {
+describe('server', () => {
 
-    it('starts server and returns hapi server object', function (done) {
+    it('starts server and returns hapi server object', (done) => {
 
-        App.init( function (err, server) {
+        App.init( (err, server) => {
 
             expect(err).to.not.exist();
-            expect(server).to.be.instanceof(require('hapi').Server);
+            expect(typeof (server)).to.be.equal(typeof (require('hapi')));
 
             server.stop(done);
         });
     });
 
-    it('starts server with error, it should stop', function (done) {
+    it('starts server with error, it should stop', (done) => {
 
-        var orig = Plugin.register;
-        Plugin.register = function (server, options, next) {
+        const orig = Plugin.register;
+        Plugin.register = (server, options, next) => {
 
             Plugin.register = orig;
             return next(new Error('register plugin failed'));
@@ -38,7 +38,7 @@ describe('server', function () {
             name: 'faulty plugin'
         };
 
-        App.init( function (err, server) {
+        App.init( (err, server) => {
 
             expect(err).to.exist();
             expect(err.message).to.equal('register plugin failed');

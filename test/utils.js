@@ -1,22 +1,22 @@
 'use strict';
 
 // Load modules
-var Code = require('code');
-var Lab = require('lab');
-var Path = require('path');
-var Utils = require('../lib/utils');
+const Code = require('code');
+const Lab = require('lab');
+const Path = require('path');
+const Utils = require('../lib/utils');
 
 // Test shortcuts
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
-var expect = Code.expect;
-var it = lab.test;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
+const expect = Code.expect;
+const it = lab.test;
 
-describe('utils - utils/index', function () {
+describe('utils - utils/index', () => {
 
-    it('Checks if lsdir returns array of only wanted files', function (done) {
+    it('Checks if lsdir returns array of only wanted files', (done) => {
 
-        var files = Utils.lsdir(Path.join(__dirname),'utils.js');
+        const files = Utils.lsdir(Path.join(__dirname),'utils.js');
 
         expect(files).to.be.array();
         expect(files).not.to.contain('utils.js');

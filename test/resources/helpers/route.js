@@ -1,25 +1,28 @@
 'use strict';
 
 // Load modules
-var Hapi = require('hapi');
-var Code = require('code');
-var Lab = require('lab');
-var Route = require('../../../lib/resources').route;
+const Code = require('code');
+const Lab = require('lab');
+const Route = require('../../../lib/resources').route;
 
 // Test shortcuts
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
-var expect = Code.expect;
-var it = lab.test;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
+const expect = Code.expect;
+const it = lab.test;
 
 // Tesing the index
-describe('resources /helper/route', function () {
+describe('resources /helper/route', () => {
 
-    it('Throw error when attempt to create an invalid route', function (done) {
+    it('Throw error when attempt to create an invalid route', (done) => {
 
+        let testroute;
         try {
-            var testroute = new Route();
-        } catch (error){
+
+            // This should never be called
+            testroute = new Route();
+        }
+        catch (error){
 
             expect(error).to.exist();
             expect(error.name).to.equal('ValidationError');
