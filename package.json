@@ -30,7 +30,7 @@
     "good": "6.x.x",
     "good-console": "5.x.x",
     "good-file": "5.x.x",
-    "hapi": "10.x.x",
+    "hapi": "13.x.x",
     "hapi-auth-hawk": "3.x.x",
     "hoek": "2.x.x",
     "http-status": "0.2.0",
@@ -42,7 +42,7 @@
     "code": "1.x.x",
     "gulp": "3.x.x",
     "hawk": "4.x.x",
-    "lab": "5.x.x"
+    "lab": "10.x.x"
   },
   "engines": {
     "node": ">=0.10.35"

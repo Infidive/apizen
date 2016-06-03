@@ -1,13 +1,17 @@
 'use strict';
 
-var Gulp = require('gulp');
-var Exec = require('child_process').exec;
+const Gulp = require('gulp');
+const Exec = require('child_process').exec;
 
 // Run tests
-Gulp.task('test', function (callback) {
+Gulp.task('test', (callback) => {
 
-    Exec('npm test', function (error, stdout, stderr) {
+    Exec('npm test', (error, stdout, stderr) => {
 
+        if (error) {
+            console.log('Gulp-Task: failed to run tests');
+            callback(error);
+        }
         console.log(stdout);
         console.log(stderr);
         callback();
@@ -15,9 +19,9 @@ Gulp.task('test', function (callback) {
 });
 
 // Run installs
-Gulp.task('modules', function (callback) {
+Gulp.task('modules', (callback) => {
 
-    Exec('npm install', function (error, stdout, stderr){
+    Exec('npm install', (error, stdout, stderr) => {
 
         console.log(stdout);
         console.log(stderr);
@@ -26,7 +30,7 @@ Gulp.task('modules', function (callback) {
 });
 
 // Watch changes
-Gulp.task('watch', ['modules', 'test'], function () {
+Gulp.task('watch', ['modules', 'test'], () => {
 
     // If files changes run test coverages
     Gulp.watch(['lib/**/*.js', 'test/**/**/*.js'], ['test']);
